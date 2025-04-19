@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TREKI - Multi-interface API Testing Tool
+
+Treki is a modern, sleek API testing application with a web interface similar to Postman but with a more intuitive UI. It allows users to organize API requests into collections, execute requests, and view responses in a clean, minimalist interface.
+
+## Features
+
+- **User Authentication**: Secure login and registration system
+- **Collection Management**: Organize API requests into nested collections
+- **Request Builder**: Create and customize API requests with headers, parameters, and body
+- **Response Viewer**: View API responses with syntax highlighting
+- **Dark Theme**: Modern dark UI with orange accent colors
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, Tailwind CSS, shadcn/ui
+- **Backend**: Node.js, Express.js (running locally on port 5000)
+- **Storage**: LocalStorage for client-side persistence, Backend DB for server persistence
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 18+ installed
+- Backend service running on http://localhost:5000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.comrohit-burman/treki.git
+   cd treki
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Testing the Application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Make sure your backend is running on port 5000
+   
+2. Register a new account:
+   - Navigate to http://localhost:3000/register
+   - Fill in your details and create an account
 
-## Deploy on Vercel
+3. Log in with your credentials:
+   - Navigate to http://localhost:3000/login
+   - Enter your email and password
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Using the API Testing Interface:
+   - Create a new collection using the "+ New Collection" button
+   - Add a new request to your collection
+   - Configure your request:
+     - Choose HTTP method (GET, POST, etc.)
+     - Enter the URL
+     - Add headers if needed
+     - Add query parameters if needed
+     - Add a request body for POST/PUT requests
+   - Click "Send" to execute the request
+   - View the response in the right panel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Available Backend Endpoints
+
+### Authentication Endpoints
+
+- **POST /api/auth/register**
+  - Registers a new user
+  - Body: `{ "username": "string", "email": "string", "password": "string" }`
+
+- **POST /api/auth/login**
+  - Logs in an existing user
+  - Body: `{ "email": "string", "password": "string" }`
+  - Returns: JWT token for authentication
+
+### Request Handling Endpoints
+
+- **POST /api/requests/send**
+  - Sends an API request through the backend
+  - Requires authentication
+  - Body: `{ "method": "string", "url": "string", "headers": {}, "body": {} }`
+
+- **GET /api/requests/**
+  - Fetches all saved requests for the authenticated user
+
+- **GET /api/requests/:id**
+  - Fetches a specific request by ID
+
+- **PUT /api/requests/:id**
+  - Updates a request by ID
+
+- **DELETE /api/requests/:id**
+  - Deletes a request by ID
+
+- **GET /api/requests/history**
+  - Fetches the request history for the authenticated user
