@@ -16,7 +16,7 @@ This repository serves as the Frontend of the Treki project. You can find the ot
 - *Prettified JSON Responses:* View responses in a beautifully formatted, colored JSON layout for easy reading and debugging.
 
 ### ⚒️ Frontend Tech Stack
-- Framework: React.js
+- Framework: Next.js
 - Routing: React Router DOM
 - UI/UX: Tailwind CSS
 - State Management: Local Storage + internal component state
