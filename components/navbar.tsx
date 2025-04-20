@@ -31,7 +31,7 @@ export default function Navbar() {
           <Link href="#tech" className="text-muted-foreground hover:text-foreground transition-colors">
             Tech Stack
           </Link>
-          <Link href="https://github.com" className="text-muted-foreground hover:text-foreground transition-colors">
+          <Link href="https://github.com/rohit-burman/treki-web" className="text-muted-foreground hover:text-foreground transition-colors">
             GitHub
           </Link>
         </nav>

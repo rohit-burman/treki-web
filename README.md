@@ -1,103 +1,158 @@
-# TREKI - Multi-interface API Testing Tool
+# Treki
+*API Request Manager*
 
-Treki is a modern, sleek API testing application with a web interface similar to Postman but with a more intuitive UI. It allows users to organize API requests into collections, execute requests, and view responses in a clean, minimalist interface.
+Treki is an all-in-one tool designed to help developers manage and send API requests efficiently. The project is split into three main parts:
+- *Frontend:* A clean and modern UI that provides a user-friendly experience for sending requests and managing collections of requests.
+- *Backend:* A RESTful API service that handles user authentication, request management, and data storage.
+- *CLI:* A command-line tool for developers to interact with the API and perform request operations directly from the terminal.
 
-## Features
+This repository serves as the Frontend of the Treki project. You can find the other *repositories* of the project in the respective sections below.
 
-- **User Authentication**: Secure login and registration system
-- **Collection Management**: Organize API requests into nested collections
-- **Request Builder**: Create and customize API requests with headers, parameters, and body
-- **Response Viewer**: View API responses with syntax highlighting
-- **Dark Theme**: Modern dark UI with orange accent colors
+## Frontend Features
+- *Clean and Modern UI:* A user-friendly interface designed to make API request management simple and intuitive.
+- *User Authentication:* Login and register functionality to keep your requests secure.
+- *Send Requests:* Easily send API requests with customizable bodies and headers.
+- *Request Collections:* Group related requests together for better organization.
+- *Prettified JSON Responses:* View responses in a beautifully formatted, colored JSON layout for easy reading and debugging.
 
-## Tech Stack
+### ⚒️ Frontend Tech Stack
+- Framework: React.js
+- Routing: React Router DOM
+- UI/UX: Tailwind CSS
+- State Management: Local Storage + internal component state
+- HTTP Client: Axios
+- Deployment: Vercel
+- Theme: Minimal, intuitive interface for testing APIs
 
-- **Frontend**: Next.js 15, React 19, Tailwind CSS, shadcn/ui
-- **Backend**: Node.js, Express.js (running locally on port 5000)
-- **Storage**: LocalStorage for client-side persistence, Backend DB for server persistence
+## CLI Overview
+The Treki CLI (Command Line Interface) allows developers to interact with the backend API directly from their terminal. It's designed to make it easy to send API requests, retrieve responses, and manage your request history without needing to use the web interface.
 
-## Getting Started
+### CLI Features
+- *Run Without Login:* You can use Treki CLI without logging in. Send basic API requests without any setup.
+- *Optional Login Support:* If you log in, you can access stored requests and run them by ID.
+- *Rust-Powered Performance:* Built with Rust, ensuring blazing-fast execution.
+- *Custom Requests:* Send GET, POST, PUT, PATCH, DELETE requests with custom bodies and headers. Example:
+bash
+treki get https://jsonplaceholder.typicode.com/posts
 
-### Prerequisites
+- *Stored Request Execution:* Logged-in users can execute previously saved requests using:
+bash
+treki run <request_id>
 
-- Node.js 18+ installed
-- Backend service running on http://localhost:5000
+- *Prettified JSON Response:* View colored and well-formatted JSON responses.
 
-### Installation
+For more details on the usage of CLI, refer to [this repository](https://github.com/aether-flux/treki-cli).
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.comrohit-burman/treki.git
-   cd treki
-   ```
+### 🔧 CLI Tech Stack
+- Language: Rust
+- HTTP Client: reqwest
+- JSON Formatting: colored_json
+- CLI Parsing: clap
+- File Handling: dirs, serde, fs
+- Performance: Native speed, minimal memory usage
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## Backend Overview
+The backend of Treki is built with Node.js and Express. It provides authentication and request handling functionalities. The service uses Prisma as an ORM to interact with a PostgreSQL (NeonDB) database.
 
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+### Backend Features
+- User authentication (register and login)
+- Request handling with CRUD operations
+- Request history tracking
+- Acts as the brain of the frontend as well as the CLI
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+For more details on the backend, refer to [this repository](https://github.com/swarupgoswami/Treki-backend/).
 
-## Testing the Application
+### 📦 Backend Tech Stack
+- Runtime: Node.js
+- Framework: Express.js
+- Database ORM: Prisma
+- Database: PostgreSQL (NeonDB recommended for cloud)
+- Authentication: JWT
+- Environment Config: dotenv
+- Deployment: Fly.io / Railway / Render (any free-tier provider)
 
-1. Make sure your backend is running on port 5000
-   
-2. Register a new account:
-   - Navigate to http://localhost:3000/register
-   - Fill in your details and create an account
+## Installation
 
-3. Log in with your credentials:
-   - Navigate to http://localhost:3000/login
-   - Enter your email and password
+### Frontend (this repository)
+This website is deployed on [https://treki-web.vercel.app/](https://treki-web.vercel.app/).
 
-4. Using the API Testing Interface:
-   - Create a new collection using the "+ New Collection" button
-   - Add a new request to your collection
-   - Configure your request:
-     - Choose HTTP method (GET, POST, etc.)
-     - Enter the URL
-     - Add headers if needed
-     - Add query parameters if needed
-     - Add a request body for POST/PUT requests
-   - Click "Send" to execute the request
-   - View the response in the right panel
+To deploy this frontend locally, run the following commands:
+bash
+git clone https://github.com/rohit-burman/treki-web.git
+cd treki-frontend
+npm install
+npm start
 
-## Available Backend Endpoints
+This will start the frontend server on http://localhost:3000/
 
-### Authentication Endpoints
+### Backend
+To set up the backend locally, run these commands:
+sh
+git clone https://github.com/swarupgoswami/Treki-backend/
+cd Treki-backend
 
-- **POST /api/auth/register**
-  - Registers a new user
-  - Body: `{ "username": "string", "email": "string", "password": "string" }`
 
-- **POST /api/auth/login**
-  - Logs in an existing user
-  - Body: `{ "email": "string", "password": "string" }`
-  - Returns: JWT token for authentication
+Install dependencies:
+sh
+npm install
+cd backend
+npm install
 
-### Request Handling Endpoints
 
-- **POST /api/requests/send**
-  - Sends an API request through the backend
-  - Requires authentication
-  - Body: `{ "method": "string", "url": "string", "headers": {}, "body": {} }`
+Set up Prisma:
+(Run this in the root directory, not inside backend/)
+sh
+cd ..
+npx prisma generate
 
-- **GET /api/requests/**
-  - Fetches all saved requests for the authenticated user
 
-- **GET /api/requests/:id**
-  - Fetches a specific request by ID
+Have a .env file in the root directory:
+env
+DATABASE_URL="postgres_db_url"
 
-- **PUT /api/requests/:id**
-  - Updates a request by ID
 
-- **DELETE /api/requests/:id**
-  - Deletes a request by ID
+And a .env in the backend/ directory:
+env
+PORT=5000
+JWT_SECRET="your_secret_key"
 
-- **GET /api/requests/history**
-  - Fetches the request history for the authenticated user
+
+And now, you are ready to run the server:
+sh
+node backend/app.js
+
+
+This will now start the server on http://localhost:5000/.
+
+### CLI
+To install the CLI:
+
+For Linux users (Recommended):
+bash
+curl -sSL https://raw.githubusercontent.com/aether-flux/treki-cli/main/scripts/linux/install.sh | bash
+
+
+For Windows users (Experimental):
+powershell
+iwr -useb https://raw.githubusercontent.com/aether-flux/treki-cli/main/scripts/windows/install.bat | iex
+
+
+For MacOS users:
+Not officially supported. Users can build from source.
+
+#### Manual Build
+If automated scripts fail, you can build manually:
+bash
+git clone https://github.com/aether-flux/treki-cli.git
+cd treki-cli
+
+Then, 'cargo run -- <args>' would let you run the CLI.
+
+Build the executable using:
+bash
+cargo build --release
+
+
+You'll find the final binary at:
+- Linux: target/release/treki-cli
+- Windows: target/x86_64-pc-windows-gnu/release/treki-cli.exe

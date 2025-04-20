@@ -18,7 +18,7 @@ export default function CTA() {
             <Link href="#download">Get Started</Link>
           </Button>
           <Button asChild variant="outline" size="lg">
-            <Link href="https://github.com" target="_blank">
+            <Link href="https://github.com/rohit-burman/treki-web" target="_blank">
               View on GitHub
             </Link>
           </Button>
