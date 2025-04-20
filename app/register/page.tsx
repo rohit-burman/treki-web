@@ -36,7 +36,7 @@ export default function Register() {
 
     try {
       const { username, email, password } = formData;
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(process.env.NEXT_PUBLIC_API_URL +"api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +131,7 @@ export default function Register() {
                 />
               </div>
             </CardContent>
-            <CardFooter className="flex flex-col space-y-4">
+            <CardFooter className="flex flex-col space-y-4 mt-4">
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Creating account..." : "Create Account"}
               </Button>

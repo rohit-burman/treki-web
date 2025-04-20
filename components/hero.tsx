@@ -43,7 +43,7 @@ export default function Hero() {
             <code className="text-muted-foreground text-wrap">
             {/* <span className="text-primary">$</span> treki -U https://api.example.com/users -M GET -H &quot;Content-Type: application/json&quot; */}
               {/* <span className="text-primary h-full">$</span> treki-cli post https://jsonplaceholder.typicode.com/posts -b {'{\"key\":\"value\", \"key\":\"value\"}'} -H {`X-Debug-Mode:true, X-Testing-Data:TrekiCLI`} -v */}
-              <span className="text-primary h-full">$</span> treki-cli GET https://jsonplaceholder.typicode.com/posts  -v
+              <span className="text-primary h-full">$</span> treki get https://jsonplaceholder.typicode.com/posts  -v
             </code>
           </pre>
         </div>

@@ -349,7 +349,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       const startTime = performance.now();
       
       // Execute request
-      const response = await fetch("http://localhost:5000/api/requests/send", {
+      const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "api/requests/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

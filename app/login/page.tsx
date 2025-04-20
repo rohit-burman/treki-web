@@ -27,7 +27,7 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(process.env.NEXT_PUBLIC_API_URL +"api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default function Login() {
                 />
               </div>
             </CardContent>
-            <CardFooter className="flex flex-col space-y-4">
+            <CardFooter className="flex flex-col space-y-4 mt-4">
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Signing in..." : "Sign In"}
               </Button>
